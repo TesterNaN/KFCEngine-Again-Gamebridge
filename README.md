@@ -218,6 +218,42 @@ Again ──► GalCore ──► GameCore ──► Game2DCore ──► Direct
 
 ---
 
+## 程序集怎么取出来的
+
+`Again.exe` 是原生启动器套 SecuROM。.NET 程序集作为 PE 资源配置整块嵌入，加密存放：
+
+| 资源类型 | ID | 大小 | 内容 |
+|---|---|---|---|
+| `IDR_ASSEMBLY` | 110 | 2,696,712 字节 | 加密的 `Again.Managed.exe` |
+| `IDR_ASSEMBLY` | 111 | 16,384 字节 | `Invoke.dll`，明文 |
+
+文件先要取对：它不在安装包里，存放在零售盘第三张的 `Again_Data\Again.exe`。
+安装包只装数据。
+
+资源表是明文，取资源不经过 SecuROM 的解密逻辑，所以不需要处理壳的授权检查。
+
+### 解密参数
+
+`Invoke.dll` 与光谱版字节级相同（SHA256 `937B0ADA…`），参数也一样：
+
+```csharp
+string text = "KID Fans Channel";     // 3DES 密钥，补零到 24 字节
+byte[] iv = pwd 的前 8 字节;           // pwd = "Again"
+TripleDESCryptoServiceProvider.CreateDecryptor(key, iv);
+```
+
+### 步骤
+
+1. 取零售盘第三张的 `Again_Data\Again.exe`
+2. 解析 PE 资源表，定位 `IDR_ASSEMBLY` id=110
+3. 取出该资源，位于文件偏移 452,704，长度 2,696,712 字节
+4. 3DES-CBC 解密：key 取 `"KID Fans Channel"` 补零到 24 字节，
+   IV 取 `"Again"` 补零到 8 字节
+5. 明文长度是密文长度减 8
+6. 结果以 `MZ` 开头，即 `Again.Managed.exe`
+
+---
+
 ## 版权
 
 - 《Memories Off ～それから～ Again》原作 © KID Corp.
