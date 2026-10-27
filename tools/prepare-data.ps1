@@ -92,7 +92,7 @@ $app = Join-Path $tmp 'app'
 if (-not (Test-Path $app)) { throw "解包失败，没有找到 app 目录" }
 
 # --- 只要资源，不要程序 ---
-# exe / dll 由仓库编译产出，不该从光盘复制（会覆盖我们编译的 Again.exe）
+# exe / dll 由本仓库编译产出，不从光盘复制
 $skip = @('Again.exe','AgainSetting.exe','AgainSetup.exe','AgainGDF.dll',
           'DirectShowLib-2005.dll','PlayOgg.dll','Invoke.dll',
           'GameuxInstallHelper.dll','Invoke.reg')

@@ -60,7 +60,7 @@ movie\          5 个视频
 zh-CHS\         Again.resources.dll + AgainSetting.resources.dll
 ```
 
-两条路，任选一条。
+两种方式，任选其一。
 
 ### 方式一：下载游戏本体，从三张 CD 里取数据
 
@@ -68,9 +68,7 @@ zh-CHS\         Again.resources.dll + AgainSetting.resources.dll
 
 | 来源 | 文件 | SHA256 |
 |---|---|---|
-| 闲鱼购入的二手光盘镜像 | `秋之回忆 从今以后.rar` | `F544FBE8…F38D0CD1D91C` |
-
-这是别人提供的原始状态，`SHA256SUMS.md` 里记了它的校验值。
+| 零售版光盘镜像 | `秋之回忆 从今以后.rar` | `F544FBE8…F38D0CD1D91C` |
 
 解压后是这样：
 
@@ -89,8 +87,7 @@ zh-CHS\         Again.resources.dll + AgainSetting.resources.dll
 
 脚本会自动把 CD2、CD3 的分卷复制到 CD1（Inno Setup 的三卷必须同目录，否则只能解出第一卷，`chara.dat` 会少一半），然后调 `innoextract` 解包，挑出资源，跳过程序文件。
 
-> **不要运行套装里的 `setup.exe` 安装。** 不需要——我们只把光盘当数据容器。
-> 装的话会往系统里塞东西，那是这台机器上唯一会真出事的操作。
+> 不需要运行安装程序。光盘目录直接当数据容器解包即可。
 
 ### 方式二：直接下载数据包
 
@@ -126,7 +123,6 @@ SHA256  2FA08AA3E02F0A701103B577160F418F80AFB9FD37BC27B141EB1DEBC89462EC
 本仓库对应的是 KIDS Fans Channel 用 .NET 做的那一版，目录特征是 `Again.exe` + `KFCD` 开头的数据文件。
 
 ---
-
 
 ## 编译
 
@@ -204,37 +200,13 @@ Again ──► GalCore ──► GameCore ──► Game2DCore ──► Direct
 | 声音 | MCI / DirectSound 混用 | 独立 SoundCore |
 | 可运行 | ✓ 到正片 | **✓ 到序幕** |
 
-同一个作者 Mullen，同一套引擎，隔一年重写了一遍。
-2007 年新浪的访谈里组长冰天火焰说得明白：
-
-> 当时 **Mullen 先生希望在[雪萤]之后制作代号 V2 的新作品以来进化他的引擎**……
-> **我们把 [again] 称作 V2A，[DuetPure] 称作 V2D。**
-
-### 两个发行商，两套保护
-
-《AGAIN》PC 中文版由光谱（T-Time）和娱乐通（GameBridge）分别发行过，两边用的是
-**同一条 KFC 引擎**，但外壳完全换过：
-
-```
-光谱      Patch01 增量补丁   加壳                     3,147,048 字节
-娱乐通    零售版三张 CD      加壳                     7,561,216 字节
-```
-
-两边 exe 的版本资源一字不差，`Invoke.dll`、`PlayOgg.dll`、`AgainSetting.exe`
-三个组件字节级相同——所以内层是同一份 `Again.Managed.exe`，只是壳不同。
-
-本仓库的代码取自**光谱补丁**，运行数据取自**娱乐通零售版**（补丁只带增量）。
-
----
-
 ## 版权
 
 - 《Memories Off ～それから～ Again》原作 © KID Corp.
 - 中文 PC 版移植与本地化 © KIDS Fans Channel（2007）
 - .NET 运行时与 Managed DirectX © Microsoft
 
-本仓库只做**失传软件的静态存档与可读性还原**。所有代码版权归原作者，
-如果你在版权方且认为这里不该存在，开个 issue 我会删。
+本仓库为静态存档与可读性还原。代码版权归原作者，如权利人认为不妥，请通过 Issue 联系。
 
 ---
 
@@ -242,6 +214,4 @@ Again ──► GalCore ──► GameCore ──► Game2DCore ──► Direct
 
 - [KFCEngine-Yukihota](https://github.com/TesterNaN/KFCEngine-Yukihota) — 第一代《雪萤》，完整可运行的还原
 - [KFCEngine-CloseTo](https://github.com/TesterNaN/KFCEngine-CloseTo) — 第三代《思念的碎片》，同样可运行；它的变量命名大量沿用了这里的成果
-- [PROVENANCE.md](PROVENANCE.md) — 史料出处
-- [provenance/2007-11-15-sina-interview.md](provenance/2007-11-15-sina-interview.md) — 制作人员访谈全文转录（Mullen 的头衔、V2A 代号都出自这里）
 - [NOTICE.md](NOTICE.md) — 版权细节
