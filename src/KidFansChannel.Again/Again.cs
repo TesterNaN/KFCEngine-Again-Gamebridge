@@ -61,6 +61,11 @@ namespace KidFansChannel.Again
 				MessageBox.Show("System.dat not found.");
 				return;
 			}
+			if (!File.Exists("resource.dat"))
+			{
+				MessageBox.Show("Resource.dat not found.");
+				return;
+			}
 			if (!File.Exists("script.dat"))
 			{
 				MessageBox.Show("script.dat not found.");

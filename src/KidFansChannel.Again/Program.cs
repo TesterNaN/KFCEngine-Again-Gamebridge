@@ -29,15 +29,6 @@ namespace KidFansChannel.Again
 			}
 			catch (Exception ex2)
 			{
-				try
-				{
-					System.IO.File.WriteAllText(
-						System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "error.log"),
-						ex2.ToString());
-				}
-				catch (Exception)
-				{
-				}
 				MessageBox.Show(ex2.Message);
 				Application.Exit();
 			}
