@@ -93,9 +93,10 @@ zh-CHS\         Again.resources.dll + AgainSetting.resources.dll
 
 数据包已经打好了（1.92 GB，**只含资源**，不含任何 exe / dll）：
 
-| 网盘 | 链接 |
-|---|---|
-| OneDrive | [Again-data.7z](https://1drv.ms/u/c/d48d7cc20d2177d6/IQCs85Yt4fnjTr5rdJemX_-oAUJaIhn8A1vKj2YYgVViIQo?e=3nugbP) |
+| 网盘 | 链接 | 提取码 |
+|---|---|---|
+| OneDrive | [Again-data.7z](https://1drv.ms/u/c/d48d7cc20d2177d6/IQCs85Yt4fnjTr5rdJemX_-oAUJaIhn8A1vKj2YYgVViIQo?e=3nugbP) | — |
+| 百度网盘 | [Again-data.7z](https://pan.baidu.com/s/15oC-M8o1r0BOOBP4x7dmAQ) | `h48z` |
 
 下载 `Again-data.7z` 后：
 
