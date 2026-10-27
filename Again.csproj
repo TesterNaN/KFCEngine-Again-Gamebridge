@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  KFCEngine v2 —— 《秋之回忆：从今以后 AGAIN》PC 中文版运行时
+
+  用 .NET Framework 2.0 的 csc 编译（与原程序集同代工具链）。
+  MSBuild 4.0 默认只用 4.0 编译器，所以这里用 Exec 直接调 v2.0.50727 的 csc。
+
+  用法：
+      msbuild Again.csproj /t:Rebuild
+  产物：
+      bin\Release\Again.exe
+-->
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <ProjectGuid>{9C1E4A27-5B8D-4E3F-A6C2-7D0B1F8E4A55}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>KidFansChannel.Again</RootNamespace>
+    <AssemblyName>Again</AssemblyName>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <CscToolPath Condition=" '$(CscToolPath)' == '' ">C:\Windows\Microsoft.NET\Framework\v2.0.50727</CscToolPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SrcFiles Include="src\**\*.cs" />
+  </ItemGroup>
+
+  <Target Name="Build">
+    <MakeDir Directories="$(OutputPath);$(IntermediateOutputPath)" />
+
+    <!-- 静态参数 -->
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Overwrite="true" Lines="/nologo" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/utf8output" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/target:winexe" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/unsafe" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/platform:x86" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/nowarn:162,168,169,219,414,618,1607" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/out:&quot;$(OutputPath)$(AssemblyName).exe&quot;" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/resource:&quot;resources\KidFansChannel.Again.Resource.resources&quot;,KidFansChannel.Again.Resource.resources" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/resource:&quot;resources\KidFansChannel.GameCore.Window.resources&quot;,KidFansChannel.GameCore.Window.resources" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/win32icon:&quot;resources\Again.ico&quot;" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/r:&quot;$(CscToolPath)\System.dll&quot;" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/r:&quot;$(CscToolPath)\System.Windows.Forms.dll&quot;" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/r:&quot;$(CscToolPath)\System.Drawing.dll&quot;" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/r:&quot;$(CscToolPath)\System.Xml.dll&quot;" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/r:&quot;deps\DirectShowLib-2005.dll&quot;" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/r:&quot;deps\Microsoft.DirectX.dll&quot;" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/r:&quot;deps\Microsoft.DirectX.Direct3D.dll&quot;" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/r:&quot;deps\Microsoft.DirectX.Direct3DX.dll&quot;" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/r:&quot;deps\Microsoft.DirectX.DirectDraw.dll&quot;" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/r:&quot;deps\Microsoft.DirectX.DirectInput.dll&quot;" />
+    <WriteLinesToFile File="$(IntermediateOutputPath)opts.rsp" Lines="/r:&quot;deps\Microsoft.DirectX.DirectSound.dll&quot;" />
+
+    <!-- 源文件清单：每项一行 -->
+    <WriteLinesToFile File="$(IntermediateOutputPath)files.rsp" Overwrite="true"
+                      Lines="@(SrcFiles->'&quot;%(FullPath)&quot;')" />
+
+    <Exec Command="&quot;$(CscToolPath)\csc.exe&quot; @&quot;$(IntermediateOutputPath)opts.rsp&quot; @&quot;$(IntermediateOutputPath)files.rsp&quot;"
+          WorkingDirectory="$(MSBuildProjectDirectory)" />
+
+    <Message Importance="high" Text="BUILD OK -> $(OutputPath)$(AssemblyName).exe" />
+  </Target>
+
+  <Target Name="Rebuild" DependsOnTargets="Clean;Build" />
+
+  <Target Name="Clean">
+    <RemoveDir Directories="bin" />
+    <RemoveDir Directories="obj" />
+  </Target>
+
+</Project>
