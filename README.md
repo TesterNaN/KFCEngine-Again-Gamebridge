@@ -204,17 +204,17 @@ Again ──► GalCore ──► GameCore ──► Game2DCore ──► Direct
 ### 两个发行商，两套保护
 
 《AGAIN》PC 中文版由光谱（T-Time）和娱乐通（GameBridge）分别发行过，两边用的是
-**同一条 KFC 引擎**，但外壳完全换过：
+**同一条 KFC 引擎**，反盗版方案不同：
 
-```
-光谱      Patch01 增量补丁   加壳                     3,147,048 字节
-娱乐通    零售版三张 CD      加壳                     7,561,216 字节
-```
+| | 形态 | 保护 | exe |
+|---|---|---|---|
+| 光谱（T-Time） | Patch01 增量补丁 | StarForce FrontLine 5 | 3,147,048 字节 |
+| 娱乐通（GameBridge） | 零售版三张 CD | SecuROM | 7,561,216 字节 |
 
 两边 exe 的版本资源一字不差，`Invoke.dll`、`PlayOgg.dll`、`AgainSetting.exe`
-三个组件字节级相同——所以内层是同一份 `Again.Managed.exe`，只是壳不同。
+三个组件字节级相同——所以内层是同一份 `Again.Managed.exe`，只是外壳不同。
 
-本仓库的代码取自**光谱补丁**，运行数据取自**娱乐通零售版**（补丁只带增量）。
+本仓库的代码取自**娱乐通零售版**，光谱补丁只带增量，不含完整资源。
 
 ---
 
