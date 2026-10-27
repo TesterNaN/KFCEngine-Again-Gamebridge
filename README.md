@@ -147,7 +147,7 @@ msbuild Again.csproj /t:Rebuild
 | `Microsoft.DirectX.Direct3DX.dll` | **1.0.2911** | 与原始程序集引用的版本一致 |
 | `Microsoft.DirectX.DirectInput.dll` | 1.0.2902 | 输入 |
 | `Microsoft.DirectX.DirectSound.dll` | 1.0.2902 | 音频 |
-| \DirectShowLib-2005.dll\ | 2.0.0.0 | 视频播放 |
+| `DirectShowLib-2005.dll` | 2.0.0.0 | 视频播放 |
 
 这些是 .NET 2.0 时代的 Managed DirectX，原本装在
 `C:\Windows\Microsoft.NET\DirectX for Managed Code\` 下。
